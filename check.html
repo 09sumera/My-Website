@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Water Quality Checker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="check.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <i class="fas fa-bolt"></i>
+            <h1>Water Quality Checker</h1>
+            <hr />
+        </div>
+
+        <div class="form-card">
+            <h2>Enter the Water Parameters</h2>
+
+            <div class="input-group">
+                <label for="ph">pH:</label>
+                <input type="text" id="ph" placeholder="e.g. 7.0" />
+            </div>
+
+            <div class="input-group">
+                <label for="turbidity">TURBIDITY:</label>
+                <input type="text" id="turbidity" placeholder="e.g. 5 NTU" />
+            </div>
+
+            <div class="input-group">
+                <label for="tds">TDS (mgs/L):</label>
+                <input type="text" id="tds" placeholder="e.g. 500" />
+            </div>
+
+            <div class="input-group">
+                <label for="temperature">TEMPERATURE (°C):</label>
+                <input type="text" id="temperature" placeholder="e.g. 25" />
+            </div>
+
+            <div class="input-group">
+                <label for="chlorine">CHLORINE (mgs/L):</label>
+                <input type="text" id="chlorine" placeholder="e.g. 0.5" />
+            </div>
+
+            <!-- FIX: button calls the function -->
+            <button onclick="checkQuality()">Check</button>
+        </div>
+    </div>
+
+    <script>
+        function checkQuality() {
+
+            // Get values
+            let ph = document.getElementById("ph").value;
+            let turbidity = document.getElementById("turbidity").value;
+            let tds = document.getElementById("tds").value;
+            let temp = document.getElementById("temperature").value;  // FIXED
+            let chlorine = document.getElementById("chlorine").value;
+
+            // Check if any field is empty
+            if (!ph || !turbidity || !tds || !temp || !chlorine) {
+                alert("Please fill all fields");
+                return;
+            }
+
+            // Store data in localStorage
+            let data = {
+                ph: ph,
+                turbidity: turbidity,
+                tds: tds,
+                temp: temp,
+                chlorine: chlorine
+            };
+
+            localStorage.setItem("waterData", JSON.stringify(data));
+
+            // Redirect to result page
+            window.location.href = "result.html";
+        }
+    </script>
+
+</body>
+
+</html>
